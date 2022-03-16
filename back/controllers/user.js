@@ -6,11 +6,13 @@ require('dotenv').config();
 exports.signup = (req, res, next) => {
   if(!req.body.email){
     return res.status(400).json({ error : 'Paramètre manquant'});
-  }
+  };
+  if(!/^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/.test(req.body.email)){
+    return res.status(400).json({ error : 'Email non correct'});
+  };
   if(!req.body.password){
     return res.status(400).json({ error : 'Paramètre manquant'});
-  }
-
+  };
     bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const user = new User({
