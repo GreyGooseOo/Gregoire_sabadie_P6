@@ -140,7 +140,6 @@ exports.likeSauce = (req, res, next) =>{
       sauce.dislikes++;
       sauce.usersDisliked.push(req.body.userId);
     }
-    console.log(sauce)
     Sauce.updateOne({_id: req.params.id}, sauce)
     .then(() => {
       res.status(201).json({
