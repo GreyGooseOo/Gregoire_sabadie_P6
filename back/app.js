@@ -4,8 +4,9 @@ const mongoose = require('mongoose');
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
 const path = require('path');
+require('dotenv').config();
 
-mongoose.connect('mongodb+srv://Piiquante:Sauces23@greygoosecluster.pvngc.mongodb.net/GreyGooseCluster?retryWrites=true&w=majority',
+mongoose.connect(`mongodb+srv://Piiquante:${process.env.DB_PASSWORD}@greygoosecluster.pvngc.mongodb.net/GreyGooseCluster?retryWrites=true&w=majority`,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
