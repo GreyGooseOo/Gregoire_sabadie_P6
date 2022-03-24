@@ -13,17 +13,20 @@ exports.signup = (req, res, next) => {
   if(!req.body.password){
     return res.status(400).json({ error : 'Paramètre manquant'});
   };
-    bcrypt.hash(req.body.password, 10)
-    .then(hash => {
-      const user = new User({
-        email: req.body.email,
-        password: hash
-      });
-      user.save()
-        .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
-        .catch(error => res.status(400).json({ error }));
-    })
-    .catch(error => res.status(500).json({ error }));
+  if(!/^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{8,}$/.test(req.body.password)){
+    return res.status(400).json({ error : 'Le Mot de passe doit contenir 8 caractères avec au moins 1 majuscule et 1 chiffre'});
+  };
+  bcrypt.hash(req.body.password, 10)
+  .then(hash => {
+    const user = new User({
+      email: req.body.email,
+      password: hash
+    });
+    user.save()
+      .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
+      .catch(error => res.status(400).json({ error }));
+  })
+  .catch(error => res.status(500).json({ error }));
 };
 
 exports.login = (req, res, next) => {
