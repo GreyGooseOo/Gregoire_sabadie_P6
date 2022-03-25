@@ -13,9 +13,6 @@ exports.signup = (req, res, next) => {
   if(!req.body.password){
     return res.status(400).json({ error : 'Paramètre manquant'});
   };
-  if(!/^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{8,}$/.test(req.body.password)){
-    return res.status(400).json({ error : 'Le Mot de passe doit contenir 8 caractères avec au moins 1 majuscule et 1 chiffre'});
-  };
   bcrypt.hash(req.body.password, 10)
   .then(hash => {
     const user = new User({
