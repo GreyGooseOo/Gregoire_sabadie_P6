@@ -1,5 +1,7 @@
+//appel du plugin pour le bon fonctionnement du middleware
 const mongoose = require('mongoose');
 
+//modèle de l'objet sauce qui sera implanter dans la base de donnée
 const sauceSchema = mongoose.Schema({
   name: { type: String, required: true },
   manufacturer: { type: String, required: true },

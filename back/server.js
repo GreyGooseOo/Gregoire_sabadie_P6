@@ -2,6 +2,7 @@ const http = require('http');
 const app = require('./app');
 require('dotenv').config();
 
+// creation du serveur
 const normalizePort = val => {
   const port = parseInt(val, 10);
 
@@ -13,6 +14,7 @@ const normalizePort = val => {
   }
   return false;
 };
+// voir le fichier .env pour avoir la valuer du port
 const port = normalizePort(process.env.PORT);
 app.set('port', port);
 
